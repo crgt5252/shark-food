@@ -29,6 +29,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.currPhoto = nil;
+    self.imageView.image = nil;
 }
 
 

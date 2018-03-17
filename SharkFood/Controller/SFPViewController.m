@@ -17,10 +17,6 @@
 //manager
 #import "SFPContentManager.h"
 
-
-const CGFloat kLineSpacing = 2;
-const CGFloat kInterItemSpacing = 2;
-
 @interface SFPViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -28,6 +24,10 @@ const CGFloat kInterItemSpacing = 2;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) BOOL isFetchingContent;
+@property (weak, nonatomic) IBOutlet UIImageView *oceanImageView;
+@property (weak, nonatomic) IBOutlet UIView *logoContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *swipePrompt;
+
 
 @end
 
@@ -37,9 +37,17 @@ const CGFloat kInterItemSpacing = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.collectionView];
+    [self.view insertSubview:self.collectionView belowSubview:self.oceanImageView];
     self.currentPage = 1;
     [self refreshContent];
+    
+    UISwipeGestureRecognizer *swipeGRLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(startFishing)];
+    swipeGRLeft.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.oceanImageView addGestureRecognizer:swipeGRLeft];
+    
+    UISwipeGestureRecognizer *swipeGRRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(startFishing)];
+    swipeGRRight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.oceanImageView addGestureRecognizer:swipeGRRight];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +57,13 @@ const CGFloat kInterItemSpacing = 2;
 
 #pragma mark - Layout
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    CGFloat headerHeight = 80;
+    CGFloat headerHeight = 60;
     self.collectionView.frame = CGRectMake(0, headerHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - headerHeight);
 }
 
@@ -69,9 +81,15 @@ const CGFloat kInterItemSpacing = 2;
     if (!_collectionView) {
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumLineSpacing = kLineSpacing;
-        layout.minimumInteritemSpacing = kInterItemSpacing;
-        CGFloat itemSize = ([UIScreen mainScreen].bounds.size.width - (3 * kInterItemSpacing)) / 3;
+        CGFloat inset = 20;
+        CGFloat minSpacing = 8;
+        layout.sectionInset = UIEdgeInsetsMake(inset, inset, 0, inset);
+        layout.minimumLineSpacing = minSpacing;
+        layout.minimumInteritemSpacing = minSpacing;
+
+        NSInteger numColumnns = [UIScreen mainScreen].bounds.size.width <  [UIScreen mainScreen].bounds.size.height ? 3 : 5;
+        CGFloat contentSize = [UIScreen mainScreen].bounds.size.width - (2 * inset) - (numColumnns * minSpacing);
+        CGFloat itemSize = round(contentSize / numColumnns);
         layout.itemSize = CGSizeMake(itemSize, itemSize);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -131,6 +149,17 @@ const CGFloat kInterItemSpacing = 2;
 
 
 #pragma mark - Private
+
+- (void)startFishing {
+    [UIView animateWithDuration:0.4 animations:^{
+        self.oceanImageView.alpha = 0.1;
+        self.logoContainerView.alpha = 0.0f;
+        self.swipePrompt.alpha = 0.0f;
+
+    } completion:^(BOOL finished) {
+        self.oceanImageView.userInteractionEnabled = false;
+    }];
+}
 
 - (void)refreshContent {
     

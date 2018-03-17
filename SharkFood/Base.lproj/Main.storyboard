@@ -17,12 +17,85 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid-header" translatesAutoresizingMaskIntoConstraints="NO" id="oFz-aR-vW9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="yqq-IE-xUR"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SharkFeed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-Tl-n7u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jhe-5i-mqy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-bg" translatesAutoresizingMaskIntoConstraints="NO" id="fXD-Tv-EYO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBR-5C-3NV" userLabel="ContainerView">
+                                <rect key="frame" x="87" y="233" width="200" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-img" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-I5-kLb">
+                                        <rect key="frame" x="9.5" y="0.0" width="181" height="85"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-title" translatesAutoresizingMaskIntoConstraints="NO" id="sgc-GW-gZw">
+                                        <rect key="frame" x="10" y="135" width="181" height="16"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="sgc-GW-gZw" firstAttribute="width" secondItem="dGJ-I5-kLb" secondAttribute="width" id="6qf-Bc-YxQ"/>
+                                    <constraint firstAttribute="height" constant="200" id="Cg0-19-j9X"/>
+                                    <constraint firstItem="sgc-GW-gZw" firstAttribute="top" secondItem="dGJ-I5-kLb" secondAttribute="bottom" constant="50" id="MDc-By-3OV"/>
+                                    <constraint firstItem="dGJ-I5-kLb" firstAttribute="centerX" secondItem="XBR-5C-3NV" secondAttribute="centerX" id="OdP-pt-D1w"/>
+                                    <constraint firstItem="dGJ-I5-kLb" firstAttribute="top" secondItem="XBR-5C-3NV" secondAttribute="top" id="obH-RT-hmv"/>
+                                    <constraint firstAttribute="width" constant="200" id="uLS-kG-Q9u"/>
+                                    <constraint firstItem="sgc-GW-gZw" firstAttribute="centerX" secondItem="XBR-5C-3NV" secondAttribute="centerX" id="w8G-Xi-C6W"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe To Start Feeding" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCb-9a-jF4">
+                                <rect key="frame" x="20" y="593" width="335" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7IR-SV-owI"/>
+                            <constraint firstItem="XBR-5C-3NV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AeR-bB-sCH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N4D-Tl-n7u" secondAttribute="trailing" id="MCB-wY-WQJ"/>
+                            <constraint firstItem="N4D-Tl-n7u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NBH-bH-3Ll"/>
+                            <constraint firstItem="N4D-Tl-n7u" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Rbv-z5-8DB"/>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sm1-Y1-Ly1"/>
+                            <constraint firstItem="ZCb-9a-jF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Z83-mX-r2t"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZCb-9a-jF4" secondAttribute="bottom" constant="50" id="awO-Sq-3Vi"/>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gHI-70-63h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZCb-9a-jF4" secondAttribute="trailing" constant="20" id="pW8-Qj-Xbs"/>
+                            <constraint firstItem="XBR-5C-3NV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ryq-e5-6gM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="logoContainerView" destination="XBR-5C-3NV" id="HmJ-XI-jzu"/>
+                        <outlet property="oceanImageView" destination="fXD-Tv-EYO" id="qMy-wK-94P"/>
+                        <outlet property="swipePrompt" destination="ZCb-9a-jF4" id="yGK-9w-vKe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="32.833583208395808"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="grid-header" width="207" height="31"/>
+        <image name="intro-bg" width="414" height="736"/>
+        <image name="logo-img" width="181" height="85"/>
+        <image name="logo-title" width="104" height="16"/>
+    </resources>
 </document>
