@@ -15,6 +15,8 @@
 		87C2D24E205CB2BA00B3786E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D24D205CB2BA00B3786E /* main.m */; };
 		87C2D258205CB2BA00B3786E /* SharkFoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D257205CB2BA00B3786E /* SharkFoodTests.m */; };
 		87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D267205CBE0500B3786E /* SFPContentManager.m */; };
+		87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */; };
+		87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26D205CD5AF00B3786E /* SFPPhoto.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		87C2D259205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87C2D266205CBE0500B3786E /* SFPContentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPContentManager.h; sourceTree = "<group>"; };
 		87C2D267205CBE0500B3786E /* SFPContentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPContentManager.m; sourceTree = "<group>"; };
+		87C2D269205CD58C00B3786E /* SFPMasterPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPMasterPhoto.h; sourceTree = "<group>"; };
+		87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPMasterPhoto.m; sourceTree = "<group>"; };
+		87C2D26C205CD5AF00B3786E /* SFPPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPPhoto.h; sourceTree = "<group>"; };
+		87C2D26D205CD5AF00B3786E /* SFPPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPPhoto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,10 @@
 		87C2D263205CBD9800B3786E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				87C2D269205CD58C00B3786E /* SFPMasterPhoto.h */,
+				87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */,
+				87C2D26C205CD5AF00B3786E /* SFPPhoto.h */,
+				87C2D26D205CD5AF00B3786E /* SFPPhoto.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +256,8 @@
 				87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */,
 				87C2D24E205CB2BA00B3786E /* main.m in Sources */,
 				87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */,
+				87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */,
+				87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "SFPViewController.h"
 #import "SFPContentManager.h"
+#import "SFPMasterPhoto.h"
 
 const CGFloat kLineSpacing = 2;
 const CGFloat kInterItemSpacing = 2;
@@ -91,7 +92,7 @@ const CGFloat kInterItemSpacing = 2;
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 20; //self.contentArray.count;
+    return self.contentArray.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,17 +119,14 @@ const CGFloat kInterItemSpacing = 2;
 }
 
 - (void)refreshContent {
-    //TODO: actually refresh the content
-   // [self performSelector:@selector(reloadData) withObject:nil afterDelay:2];
-    
-    // clear cache ?
-    
     [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray *contentArray) {
         if (error) {
-            NSLog(@"error refreshing content");
+            //TODO: - add UI alert.  For now, just stop the refresh control.
+            [self reloadData];
         }
         else {
-            NSLog(@"content array %@",contentArray);
+            self.contentArray = [NSArray arrayWithArray:contentArray];
+            [self reloadData];
         }
     }];
 }

@@ -7,6 +7,7 @@
 //
 
 #import "SFPContentManager.h"
+#import "SFPMasterPhoto.h"
 
 @interface SFPContentManager ()
 @property (nonatomic, strong) NSMutableDictionary *contentDictionary;
@@ -122,13 +123,21 @@ NSString *const SPFErrorDomain = @"SPFErrorDomain";
     }
     
     //parse json
-    NSLog(@"raw jsonDict %@",jsonDict);
+    NSMutableArray *resultsArray = [[NSMutableArray alloc] init];
+    if (jsonDict[@"photos"] != nil) {
+        NSDictionary *photosDictionary = jsonDict[@"photos"];
+        if (photosDictionary[@"photo"] != nil) {
+            NSArray *photosArray = photosDictionary[@"photo"];
+            for (NSDictionary *photoDictionary in photosArray) {
+                [resultsArray addObject:[[SFPMasterPhoto alloc] initWithAttributes:photoDictionary]];
+            }
+        }
+    }
+    //cache content
+    [self cacheContent:resultsArray forPage:page];
 
-        //cache content
-            //return the parsed content in our completion handler
-    
-        //fail?
-            //return error
+    //return the parsed content in our completion handler
+    completion(nil,resultsArray);
 }
 
 - (void)cacheContent:(NSArray *)content forPage:(NSInteger)page {
