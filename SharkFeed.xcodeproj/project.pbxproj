@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D23F205CB2BA00B3786E /* AppDelegate.m */; };
+		87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D242205CB2BA00B3786E /* SFPViewController.m */; };
+		87C2D246205CB2BA00B3786E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D244205CB2BA00B3786E /* Main.storyboard */; };
+		87C2D248205CB2BA00B3786E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D247205CB2BA00B3786E /* Assets.xcassets */; };
+		87C2D24E205CB2BA00B3786E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D24D205CB2BA00B3786E /* main.m */; };
+		87C2D258205CB2BA00B3786E /* SharkFeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D257205CB2BA00B3786E /* SharkFeedTests.m */; };
+		87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D267205CBE0500B3786E /* SFPContentManager.m */; };
+		87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */; };
+		87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26D205CD5AF00B3786E /* SFPPhoto.m */; };
+		87C2D271205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */; };
+		87C2D274205CE47B00B3786E /* SFPImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D273205CE47B00B3786E /* SFPImageCache.m */; };
+		87C2D27A205D141A00B3786E /* SFPLightBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D279205D141A00B3786E /* SFPLightBoxViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		87C2D254205CB2BA00B3786E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 87C2D233205CB2BA00B3786E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 87C2D23A205CB2BA00B3786E;
+			remoteInfo = SharkFood;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		87C2D23B205CB2BA00B3786E /* SharkFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SharkFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87C2D23E205CB2BA00B3786E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		87C2D23F205CB2BA00B3786E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		87C2D241205CB2BA00B3786E /* SFPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPViewController.h; sourceTree = "<group>"; };
+		87C2D242205CB2BA00B3786E /* SFPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPViewController.m; sourceTree = "<group>"; };
+		87C2D245205CB2BA00B3786E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		87C2D247205CB2BA00B3786E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87C2D24C205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87C2D24D205CB2BA00B3786E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		87C2D253205CB2BA00B3786E /* SharkFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharkFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		87C2D257205CB2BA00B3786E /* SharkFeedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharkFeedTests.m; sourceTree = "<group>"; };
+		87C2D259205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87C2D266205CBE0500B3786E /* SFPContentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPContentManager.h; sourceTree = "<group>"; };
+		87C2D267205CBE0500B3786E /* SFPContentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPContentManager.m; sourceTree = "<group>"; };
+		87C2D269205CD58C00B3786E /* SFPMasterPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPMasterPhoto.h; sourceTree = "<group>"; };
+		87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPMasterPhoto.m; sourceTree = "<group>"; };
+		87C2D26C205CD5AF00B3786E /* SFPPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPPhoto.h; sourceTree = "<group>"; };
+		87C2D26D205CD5AF00B3786E /* SFPPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPPhoto.m; sourceTree = "<group>"; };
+		87C2D26F205CE12C00B3786E /* SFPThumbnailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPThumbnailCollectionViewCell.h; sourceTree = "<group>"; };
+		87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPThumbnailCollectionViewCell.m; sourceTree = "<group>"; };
+		87C2D272205CE47B00B3786E /* SFPImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPImageCache.h; sourceTree = "<group>"; };
+		87C2D273205CE47B00B3786E /* SFPImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPImageCache.m; sourceTree = "<group>"; };
+		87C2D278205D141A00B3786E /* SFPLightBoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPLightBoxViewController.h; sourceTree = "<group>"; };
+		87C2D279205D141A00B3786E /* SFPLightBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPLightBoxViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87C2D238205CB2BA00B3786E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87C2D250205CB2BA00B3786E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		87C2D232205CB2BA00B3786E = {
+			isa = PBXGroup;
+			children = (
+				87C2D23D205CB2BA00B3786E /* SharkFeed */,
+				87C2D256205CB2BA00B3786E /* SharkFeedTests */,
+				87C2D23C205CB2BA00B3786E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		87C2D23C205CB2BA00B3786E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D23B205CB2BA00B3786E /* SharkFeed.app */,
+				87C2D253205CB2BA00B3786E /* SharkFeedTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87C2D23D205CB2BA00B3786E /* SharkFeed */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D23E205CB2BA00B3786E /* AppDelegate.h */,
+				87C2D23F205CB2BA00B3786E /* AppDelegate.m */,
+				87C2D263205CBD9800B3786E /* Model */,
+				87C2D264205CBDAA00B3786E /* View */,
+				87C2D262205CBD7A00B3786E /* Controller */,
+				87C2D265205CBDBB00B3786E /* Manager */,
+				87C2D244205CB2BA00B3786E /* Main.storyboard */,
+				87C2D247205CB2BA00B3786E /* Assets.xcassets */,
+				87C2D24C205CB2BA00B3786E /* Info.plist */,
+				87C2D24D205CB2BA00B3786E /* main.m */,
+			);
+			path = SharkFeed;
+			sourceTree = "<group>";
+		};
+		87C2D256205CB2BA00B3786E /* SharkFeedTests */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D257205CB2BA00B3786E /* SharkFeedTests.m */,
+				87C2D259205CB2BA00B3786E /* Info.plist */,
+			);
+			path = SharkFeedTests;
+			sourceTree = "<group>";
+		};
+		87C2D262205CBD7A00B3786E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D241205CB2BA00B3786E /* SFPViewController.h */,
+				87C2D242205CB2BA00B3786E /* SFPViewController.m */,
+				87C2D278205D141A00B3786E /* SFPLightBoxViewController.h */,
+				87C2D279205D141A00B3786E /* SFPLightBoxViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		87C2D263205CBD9800B3786E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D269205CD58C00B3786E /* SFPMasterPhoto.h */,
+				87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */,
+				87C2D26C205CD5AF00B3786E /* SFPPhoto.h */,
+				87C2D26D205CD5AF00B3786E /* SFPPhoto.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		87C2D264205CBDAA00B3786E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D26F205CE12C00B3786E /* SFPThumbnailCollectionViewCell.h */,
+				87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87C2D265205CBDBB00B3786E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D266205CBE0500B3786E /* SFPContentManager.h */,
+				87C2D267205CBE0500B3786E /* SFPContentManager.m */,
+				87C2D272205CE47B00B3786E /* SFPImageCache.h */,
+				87C2D273205CE47B00B3786E /* SFPImageCache.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87C2D23A205CB2BA00B3786E /* SharkFeed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87C2D25C205CB2BA00B3786E /* Build configuration list for PBXNativeTarget "SharkFeed" */;
+			buildPhases = (
+				87C2D237205CB2BA00B3786E /* Sources */,
+				87C2D238205CB2BA00B3786E /* Frameworks */,
+				87C2D239205CB2BA00B3786E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SharkFeed;
+			productName = SharkFood;
+			productReference = 87C2D23B205CB2BA00B3786E /* SharkFeed.app */;
+			productType = "com.apple.product-type.application";
+		};
+		87C2D252205CB2BA00B3786E /* SharkFeedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87C2D25F205CB2BA00B3786E /* Build configuration list for PBXNativeTarget "SharkFeedTests" */;
+			buildPhases = (
+				87C2D24F205CB2BA00B3786E /* Sources */,
+				87C2D250205CB2BA00B3786E /* Frameworks */,
+				87C2D251205CB2BA00B3786E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				87C2D255205CB2BA00B3786E /* PBXTargetDependency */,
+			);
+			name = SharkFeedTests;
+			productName = SharkFoodTests;
+			productReference = 87C2D253205CB2BA00B3786E /* SharkFeedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87C2D233205CB2BA00B3786E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Christopher Taylor";
+				TargetAttributes = {
+					87C2D23A205CB2BA00B3786E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					87C2D252205CB2BA00B3786E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 87C2D23A205CB2BA00B3786E;
+					};
+				};
+			};
+			buildConfigurationList = 87C2D236205CB2BA00B3786E /* Build configuration list for PBXProject "SharkFeed" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 87C2D232205CB2BA00B3786E;
+			productRefGroup = 87C2D23C205CB2BA00B3786E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87C2D23A205CB2BA00B3786E /* SharkFeed */,
+				87C2D252205CB2BA00B3786E /* SharkFeedTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		87C2D239205CB2BA00B3786E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87C2D248205CB2BA00B3786E /* Assets.xcassets in Resources */,
+				87C2D246205CB2BA00B3786E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87C2D251205CB2BA00B3786E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		87C2D237205CB2BA00B3786E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */,
+				87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */,
+				87C2D274205CE47B00B3786E /* SFPImageCache.m in Sources */,
+				87C2D24E205CB2BA00B3786E /* main.m in Sources */,
+				87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */,
+				87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */,
+				87C2D27A205D141A00B3786E /* SFPLightBoxViewController.m in Sources */,
+				87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */,
+				87C2D271205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		87C2D24F205CB2BA00B3786E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87C2D258205CB2BA00B3786E /* SharkFeedTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		87C2D255205CB2BA00B3786E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 87C2D23A205CB2BA00B3786E /* SharkFeed */;
+			targetProxy = 87C2D254205CB2BA00B3786E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		87C2D244205CB2BA00B3786E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				87C2D245205CB2BA00B3786E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		87C2D25A205CB2BA00B3786E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		87C2D25B205CB2BA00B3786E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		87C2D25D205CB2BA00B3786E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				INFOPLIST_FILE = SharkFeed/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		87C2D25E205CB2BA00B3786E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				INFOPLIST_FILE = SharkFeed/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		87C2D260205CB2BA00B3786E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				INFOPLIST_FILE = SharkFeedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFood.app/SharkFood";
+			};
+			name = Debug;
+		};
+		87C2D261205CB2BA00B3786E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				INFOPLIST_FILE = SharkFeedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFood.app/SharkFood";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		87C2D236205CB2BA00B3786E /* Build configuration list for PBXProject "SharkFeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87C2D25A205CB2BA00B3786E /* Debug */,
+				87C2D25B205CB2BA00B3786E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87C2D25C205CB2BA00B3786E /* Build configuration list for PBXNativeTarget "SharkFeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87C2D25D205CB2BA00B3786E /* Debug */,
+				87C2D25E205CB2BA00B3786E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87C2D25F205CB2BA00B3786E /* Build configuration list for PBXNativeTarget "SharkFeedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87C2D260205CB2BA00B3786E /* Debug */,
+				87C2D261205CB2BA00B3786E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 87C2D233205CB2BA00B3786E /* Project object */;
+}

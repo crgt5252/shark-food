@@ -23,9 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>SharkFood uses access to your photo library to save images for you</string>
-	<key>UILaunchStoryboardName</key>
-	<string>Main</string>
+	<string>SharkFeed uses access to your photo library to save images for you</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

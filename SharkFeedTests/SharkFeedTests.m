@@ -1,3 +1,4 @@
+
 //
 //  SharkFoodTests.m
 //  SharkFoodTests
@@ -8,11 +9,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface SharkFoodTests : XCTestCase
+@interface SharkFeedTests : XCTestCase
 
 @end
 
-@implementation SharkFoodTests
+@implementation SharkFeedTests
 
 - (void)setUp {
     [super setUp];
