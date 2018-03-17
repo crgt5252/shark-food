@@ -7,8 +7,16 @@
 //
 
 #import "SFPViewController.h"
-#import "SFPContentManager.h"
+
+//model
 #import "SFPMasterPhoto.h"
+
+//view
+#import "SFPThumbnailCollectionViewCell.h"
+
+//manager
+#import "SFPContentManager.h"
+
 
 const CGFloat kLineSpacing = 2;
 const CGFloat kInterItemSpacing = 2;
@@ -19,6 +27,7 @@ const CGFloat kInterItemSpacing = 2;
 @property (nonatomic, strong) NSArray *contentArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, assign) BOOL isFetchingContent;
 
 @end
 
@@ -28,7 +37,6 @@ const CGFloat kInterItemSpacing = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.collectionView];
     self.currentPage = 1;
     [self refreshContent];
@@ -69,13 +77,13 @@ const CGFloat kInterItemSpacing = 2;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor colorWithWhite:157.0f/255.0f alpha:1.0f];
+        _collectionView.backgroundColor = [UIColor clearColor];
         if (@available(iOS 10.0, *)) {
             _collectionView.refreshControl = self.refreshControl;
         } else {
             [_collectionView addSubview:self.refreshControl];
         }
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
+        [_collectionView registerClass:[SFPThumbnailCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([SFPThumbnailCollectionViewCell class])];
     }
     return _collectionView;
 }
@@ -96,8 +104,9 @@ const CGFloat kInterItemSpacing = 2;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    SFPThumbnailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SFPThumbnailCollectionViewCell class]) forIndexPath:indexPath];
+    SFPMasterPhoto *mPhoto = self.contentArray[indexPath.item];
+    [cell configureWithPhoto:mPhoto.thumbnail];
     return cell;
 }
 
@@ -105,30 +114,75 @@ const CGFloat kInterItemSpacing = 2;
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"index path item %i",(int)indexPath.item);
+    SFPMasterPhoto *mPhoto = self.contentArray[indexPath.item];
+    // TODO: IMPLEMENT LIGHTBOX (!) & TRANSITION ANIMATION (?)
+    NSLog(@"item title %@",mPhoto.title);
+    // NSLog(@"item id %@",mPhoto.remoteId);
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // lazily trigger fetch of upcoming content as user scrolls towards bottom of existing content
+    if (self.collectionView.isTracking) {
+        if (self.collectionView.contentOffset.y >= self.collectionView.contentSize.height - 3 * self.collectionView.frame.size.height && self.collectionView.contentSize.height > 0) {
+            [self refreshContent];
+        }
+    }
 }
 
 
 #pragma mark - Private
 
-- (void)reloadData {
-    dispatch_async(dispatch_get_main_queue(), ^(){
-        [self.refreshControl endRefreshing];
-        [self.collectionView reloadData];
-    });
-}
-
 - (void)refreshContent {
-    [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray *contentArray) {
-        if (error) {
-            //TODO: - add UI alert.  For now, just stop the refresh control.
-            [self reloadData];
-        }
-        else {
-            self.contentArray = [NSArray arrayWithArray:contentArray];
-            [self reloadData];
-        }
-    }];
+    
+    if (!self.isFetchingContent) {
+        self.isFetchingContent = YES;
+        __weak typeof(self) weakSelf = self;
+         [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray *contentArray) {
+            if (weakSelf) {
+               
+                //TODO: add error handling
+
+                //append any fresh content
+                if (!error && contentArray.count > 0) {
+
+                    //increment our page
+                    weakSelf.currentPage = weakSelf.currentPage + 1;
+                    
+                    // Update our collection view on the main thread
+                    dispatch_async(dispatch_get_main_queue(), ^(){
+                        
+                        // note our current count for our batch update
+                        NSInteger previousSection0Count = [weakSelf collectionView:weakSelf.collectionView numberOfItemsInSection:0];
+                        
+                        // update the collection view data source
+                        weakSelf.contentArray = [weakSelf.contentArray arrayByAddingObjectsFromArray:contentArray];
+                        NSInteger section0Count = weakSelf.contentArray.count;
+                        
+                        // insert our newly fetched content into our collection view
+                        void (^sectionUpdateBlock)(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) = ^void(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) {
+                            if (previousPhotoCount != photoCount) {
+                                NSMutableArray *newIndexPaths = [NSMutableArray array];
+                                for (NSUInteger index = previousPhotoCount; index < photoCount; ++index) {
+                                    [newIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:section]];
+                                }
+                                [weakSelf.collectionView insertItemsAtIndexPaths:newIndexPaths];
+                            }
+                        };
+                        // perform the batch update to our collection view
+                        [weakSelf.collectionView performBatchUpdates:^{
+                            sectionUpdateBlock(0, previousSection0Count, section0Count);
+                        } completion:nil];
+                     });
+                }
+                
+                // finish up
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    weakSelf.isFetchingContent = NO;
+                    [weakSelf.refreshControl endRefreshing];
+                });
+            }
+        }];
+    }
 }
 
 

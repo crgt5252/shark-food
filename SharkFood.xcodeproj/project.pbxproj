@@ -17,6 +17,8 @@
 		87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D267205CBE0500B3786E /* SFPContentManager.m */; };
 		87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */; };
 		87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26D205CD5AF00B3786E /* SFPPhoto.m */; };
+		87C2D271205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */; };
+		87C2D274205CE47B00B3786E /* SFPImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D273205CE47B00B3786E /* SFPImageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPMasterPhoto.m; sourceTree = "<group>"; };
 		87C2D26C205CD5AF00B3786E /* SFPPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPPhoto.h; sourceTree = "<group>"; };
 		87C2D26D205CD5AF00B3786E /* SFPPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPPhoto.m; sourceTree = "<group>"; };
+		87C2D26F205CE12C00B3786E /* SFPThumbnailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPThumbnailCollectionViewCell.h; sourceTree = "<group>"; };
+		87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPThumbnailCollectionViewCell.m; sourceTree = "<group>"; };
+		87C2D272205CE47B00B3786E /* SFPImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPImageCache.h; sourceTree = "<group>"; };
+		87C2D273205CE47B00B3786E /* SFPImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPImageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,8 @@
 		87C2D264205CBDAA00B3786E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				87C2D26F205CE12C00B3786E /* SFPThumbnailCollectionViewCell.h */,
+				87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -146,6 +154,8 @@
 			children = (
 				87C2D266205CBE0500B3786E /* SFPContentManager.h */,
 				87C2D267205CBE0500B3786E /* SFPContentManager.m */,
+				87C2D272205CE47B00B3786E /* SFPImageCache.h */,
+				87C2D273205CE47B00B3786E /* SFPImageCache.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -254,10 +264,12 @@
 			files = (
 				87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */,
 				87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */,
+				87C2D274205CE47B00B3786E /* SFPImageCache.m in Sources */,
 				87C2D24E205CB2BA00B3786E /* main.m in Sources */,
 				87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */,
 				87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */,
 				87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */,
+				87C2D271205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
