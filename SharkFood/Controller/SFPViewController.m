@@ -17,7 +17,10 @@
 //manager
 #import "SFPContentManager.h"
 
-@interface SFPViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+//controller
+#import "SFPLightBoxViewController.h"
+
+@interface SFPViewController () <UICollectionViewDelegate, UICollectionViewDataSource, SFPLightBoxViewControllerDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *contentArray;
@@ -31,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *fishImage;
 @property (weak, nonatomic) IBOutlet UIImageView *hookImageView;
 @property (nonatomic, assign) CGFloat bobble;
+@property (nonatomic, strong) SFPLightBoxViewController *lightBoxViewController;
 
 
 @end
@@ -44,6 +48,7 @@
     [self.view insertSubview:self.collectionView belowSubview:self.oceanImageView];
     self.currentPage = 1;
     [self refreshContent];
+    self.lightBoxViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     UISwipeGestureRecognizer *swipeGRLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(startFishing)];
     swipeGRLeft.direction=UISwipeGestureRecognizerDirectionLeft;
@@ -69,6 +74,7 @@
     [super viewDidLayoutSubviews];
     CGFloat headerHeight = 60;
     self.collectionView.frame = CGRectMake(0, headerHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - headerHeight);
+    self.oceanImageView.frame = self.view.bounds;
 }
 
 
@@ -79,6 +85,14 @@
         _contentArray = [NSArray array];
     }
     return _contentArray;
+}
+
+- (SFPLightBoxViewController *)lightBoxViewController {
+    if (!_lightBoxViewController) {
+        _lightBoxViewController = [[SFPLightBoxViewController  alloc] init];
+        _lightBoxViewController.delegate = self;
+    }
+    return _lightBoxViewController;
 }
 
 - (UICollectionView *)collectionView {
@@ -138,9 +152,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SFPMasterPhoto *mPhoto = self.contentArray[indexPath.item];
-    // TODO: IMPLEMENT LIGHTBOX (!) & TRANSITION ANIMATION (?)
-    NSLog(@"item title %@",mPhoto.title);
-    // NSLog(@"item id %@",mPhoto.remoteId);
+    [self.lightBoxViewController configureWithSPCPhoto:mPhoto];
+    [self presentViewController:self.lightBoxViewController animated:YES completion:nil];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -152,6 +165,11 @@
     }
 }
 
+#pragma mark - SFPLightBoxViewControllerDelegate
+
+- (void)dismiss:(SFPLightBoxViewController *)lightBoxVC {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Private
 

@@ -16,6 +16,7 @@
 @property (nonatomic, readonly) SFPPhoto *thumbnail;
 @property (nonatomic, readonly) SFPPhoto *original;
 @property (nonatomic, readonly) SFPPhoto *landscape;
+@property (nonatomic, readonly) SFPPhoto *cropped;
 
 - (instancetype)initWithAttributes:(NSDictionary *)attributes;
 

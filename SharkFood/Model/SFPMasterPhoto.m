@@ -15,6 +15,7 @@
 @property (nonatomic, strong) SFPPhoto *thumbnail;
 @property (nonatomic, strong) SFPPhoto *original;
 @property (nonatomic, strong) SFPPhoto *landscape;
+@property (nonatomic, strong) SFPPhoto *cropped;
 
 @end
 
@@ -23,11 +24,12 @@
 - (instancetype)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
-        _remoteId   = attributes[@"id"] != nil ? attributes[@"id"]  : nil;
-        _title      = attributes[@"title"] != nil ? attributes[@"title"]  : nil;
+        _remoteId   = attributes[@"id"] != nil ? attributes[@"id"]  : @"";
+        _title      = attributes[@"title"] != nil ? attributes[@"title"]  : @"";
         _thumbnail  = [self photoForType:@"t" inFullAttributes:attributes];
         _original   = [self photoForType:@"o" inFullAttributes:attributes];
         _landscape  = [self photoForType:@"l" inFullAttributes:attributes];
+        _cropped    = [self photoForType:@"c" inFullAttributes:attributes];
     }
     return self;
 }
