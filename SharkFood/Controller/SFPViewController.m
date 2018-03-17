@@ -23,6 +23,7 @@
 @interface SFPViewController () <UICollectionViewDelegate, UICollectionViewDataSource, SFPLightBoxViewControllerDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) NSArray *contentArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger currentPage;
@@ -33,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIView *ptrContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *fishImage;
 @property (weak, nonatomic) IBOutlet UIImageView *hookImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *gridHeader;
 @property (nonatomic, assign) CGFloat bobble;
 @property (nonatomic, strong) SFPLightBoxViewController *lightBoxViewController;
 
@@ -72,8 +74,9 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    CGFloat headerHeight = 60;
-    self.collectionView.frame = CGRectMake(0, headerHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - headerHeight);
+    self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.gridHeader.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.gridHeader.frame));
+    CGFloat inset = [self needsIphoneXInsetAdjustment] ?  40 : 20;
+    self.flowLayout.sectionInset = UIEdgeInsetsMake(inset, inset, 0, inset);
     self.oceanImageView.frame = self.view.bounds;
 }
 
@@ -95,22 +98,22 @@
     return _lightBoxViewController;
 }
 
+- (BOOL)needsIphoneXInsetAdjustment {
+    return ([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) &&
+           (((int)[[UIScreen mainScreen] nativeBounds].size.height) == 2436) &&
+        [UIScreen mainScreen].bounds.size.width >  [UIScreen mainScreen].bounds.size.height;
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        CGFloat inset = 20;
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        CGFloat inset = [self needsIphoneXInsetAdjustment] ?  40 : 20;
         CGFloat minSpacing = 8;
-        layout.sectionInset = UIEdgeInsetsMake(inset, inset, 0, inset);
-        layout.minimumLineSpacing = minSpacing;
-        layout.minimumInteritemSpacing = minSpacing;
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(inset, inset, 0, inset);
+        self.flowLayout.minimumLineSpacing = minSpacing;
+        self.flowLayout.minimumInteritemSpacing = minSpacing;
 
-        NSInteger numColumnns = [UIScreen mainScreen].bounds.size.width <  [UIScreen mainScreen].bounds.size.height ? 3 : 5;
-        CGFloat contentSize = [UIScreen mainScreen].bounds.size.width - (2 * inset) - (numColumnns * minSpacing);
-        CGFloat itemSize = round(contentSize / numColumnns);
-        layout.itemSize = CGSizeMake(itemSize, itemSize);
-        
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor clearColor];
@@ -164,6 +167,18 @@
         }
     }
 }
+
+#pragma mark - UICollectionViewFlowLayoutDelegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat inset = [self needsIphoneXInsetAdjustment] ?  40 : 20;
+    CGFloat minSpacing = 8;
+    NSInteger numColumnns = [UIScreen mainScreen].bounds.size.width <  [UIScreen mainScreen].bounds.size.height ? 3 : 5;
+    CGFloat contentSize = [UIScreen mainScreen].bounds.size.width - (2 * inset) - (numColumnns * minSpacing);
+    CGFloat itemSize = round(contentSize / numColumnns);
+    return CGSizeMake(itemSize, itemSize);
+}
+
 
 #pragma mark - SFPLightBoxViewControllerDelegate
 

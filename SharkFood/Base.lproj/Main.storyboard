@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grid-header" translatesAutoresizingMaskIntoConstraints="NO" id="oFz-aR-vW9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yqq-IE-xUR"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SharkFeed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4D-Tl-n7u">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jhe-5i-mqy"/>
                                 </constraints>
@@ -65,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoZ-o3-PJK" userLabel="PTRContainerView">
-                                <rect key="frame" x="0.0" y="50" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ptr-2" translatesAutoresizingMaskIntoConstraints="NO" id="pZy-Op-1q7" userLabel="ptr-2">
                                         <rect key="frame" x="173" y="50" width="28" height="50"/>
@@ -91,18 +91,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oFz-aR-vW9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7IR-SV-owI"/>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7IR-SV-owI"/>
                             <constraint firstItem="XoZ-o3-PJK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="A0P-IL-45o"/>
                             <constraint firstItem="XBR-5C-3NV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AeR-bB-sCH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N4D-Tl-n7u" secondAttribute="trailing" id="MCB-wY-WQJ"/>
                             <constraint firstItem="N4D-Tl-n7u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NBH-bH-3Ll"/>
-                            <constraint firstItem="N4D-Tl-n7u" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Rbv-z5-8DB"/>
-                            <constraint firstItem="oFz-aR-vW9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sm1-Y1-Ly1"/>
+                            <constraint firstItem="N4D-Tl-n7u" firstAttribute="top" secondItem="oFz-aR-vW9" secondAttribute="top" id="Rbv-z5-8DB"/>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Sm1-Y1-Ly1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XoZ-o3-PJK" secondAttribute="trailing" id="WLa-41-gR7"/>
                             <constraint firstItem="ZCb-9a-jF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Z83-mX-r2t"/>
                             <constraint firstItem="XoZ-o3-PJK" firstAttribute="top" secondItem="oFz-aR-vW9" secondAttribute="bottom" id="aMI-tt-vkV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZCb-9a-jF4" secondAttribute="bottom" constant="50" id="awO-Sq-3Vi"/>
-                            <constraint firstItem="oFz-aR-vW9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gHI-70-63h"/>
+                            <constraint firstItem="oFz-aR-vW9" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="gHI-70-63h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZCb-9a-jF4" secondAttribute="trailing" constant="20" id="pW8-Qj-Xbs"/>
                             <constraint firstItem="XBR-5C-3NV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ryq-e5-6gM"/>
                         </constraints>
@@ -110,6 +110,7 @@
                     </view>
                     <connections>
                         <outlet property="fishImage" destination="pZy-Op-1q7" id="5Ne-xF-cfb"/>
+                        <outlet property="gridHeader" destination="oFz-aR-vW9" id="EtR-Kb-VRL"/>
                         <outlet property="hookImageView" destination="PUs-Kl-YPE" id="7d2-p5-Srs"/>
                         <outlet property="logoContainerView" destination="XBR-5C-3NV" id="HmJ-XI-jzu"/>
                         <outlet property="oceanImageView" destination="fXD-Tv-EYO" id="qMy-wK-94P"/>
