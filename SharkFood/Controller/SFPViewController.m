@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *gridHeader;
 @property (nonatomic, assign) CGFloat bobble;
 @property (nonatomic, strong) SFPLightBoxViewController *lightBoxViewController;
-
+@property (nonatomic, assign) CGPoint swipeStartPoint;
 
 @end
 
@@ -52,13 +52,10 @@
     [self refreshContent];
     self.lightBoxViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    UISwipeGestureRecognizer *swipeGRLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(startFishing)];
-    swipeGRLeft.direction=UISwipeGestureRecognizerDirectionLeft;
-    [self.oceanImageView addGestureRecognizer:swipeGRLeft];
-    
-    UISwipeGestureRecognizer *swipeGRRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(startFishing)];
-    swipeGRRight.direction=UISwipeGestureRecognizerDirectionRight;
-    [self.oceanImageView addGestureRecognizer:swipeGRRight];
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(isPanningAtStart:)];
+    [panRecognizer setMinimumNumberOfTouches:1];
+    [panRecognizer setMaximumNumberOfTouches:1];
+    [self.oceanImageView addGestureRecognizer:panRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -188,20 +185,39 @@
 
 #pragma mark - Private
 
-- (void)startFishing {
-    [UIView animateWithDuration:0.4 animations:^{
-        self.oceanImageView.alpha = 0.1;
-        self.logoContainerView.alpha = 0.0f;
-        self.swipePrompt.alpha = 0.0f;
+-(void)isPanningAtStart:(UIPanGestureRecognizer*)panGR {
 
-    } completion:^(BOOL finished) {
-        self.oceanImageView.userInteractionEnabled = false;
-    }];
+        if (panGR.state == UIGestureRecognizerStateBegan) {
+            self.swipeStartPoint = [panGR translationInView:self.oceanImageView];
+        }
+        else if (panGR.state == UIGestureRecognizerStateChanged) {
+            CGPoint currPoint = [panGR translationInView:self.oceanImageView];
+            float deltaX = fabs(self.swipeStartPoint.x - currPoint.x);
+            float requiredDelta = CGRectGetWidth(self.view.frame) * 0.6f;
+            float swipeAlpha = 1 - (deltaX / requiredDelta);
+            if (deltaX > 0) {
+                self.oceanImageView.alpha = swipeAlpha;
+                self.logoContainerView.alpha = swipeAlpha;
+                self.swipePrompt.alpha = swipeAlpha;
+            }
+        }
+        if (panGR.state == UIGestureRecognizerStateEnded) {
+            CGPoint endPoint = [panGR translationInView:self.oceanImageView];
+            float deltaX = fabs(self.swipeStartPoint.x - endPoint.x);
+            float endAlpha = deltaX < 70 ? 1 : 0;
+            self.oceanImageView.alpha = endAlpha;
+            self.logoContainerView.alpha = endAlpha;
+            self.swipePrompt.alpha = endAlpha;
+            if (endAlpha == 0) {
+                self.oceanImageView.userInteractionEnabled = false;
+            }
+        }
 }
 
 - (void)beginPullToRefresh {
     self.ptrContainerView.alpha = 1;
     self.bobble = .1;
+    [self.view bringSubviewToFront:self.collectionView];
     [self animatePTR];
     [self refreshContent];
 }
