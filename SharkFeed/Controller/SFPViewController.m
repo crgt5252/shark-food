@@ -49,13 +49,12 @@
     [super viewDidLoad];
     [self.view insertSubview:self.collectionView belowSubview:self.oceanImageView];
     self.currentPage = 1;
-    [self refreshContentAndClearCache:NO];
-    self.lightBoxViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(isPanningAtStart:)];
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setMaximumNumberOfTouches:1];
     [self.oceanImageView addGestureRecognizer:panRecognizer];
+    [self refreshContentAndClearCache:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +90,7 @@
     if (!_lightBoxViewController) {
         _lightBoxViewController = [[SFPLightBoxViewController  alloc] init];
         _lightBoxViewController.delegate = self;
+        _lightBoxViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     }
     return _lightBoxViewController;
 }

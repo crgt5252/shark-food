@@ -14,8 +14,7 @@
 @property (nonatomic, strong) SFPMasterPhoto *masterPhoto;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *downloadBtn;
-
-
+@property (nonatomic, assign) NSInteger progImageCounter;
 @end
 
 @implementation SFPLightBoxViewController
@@ -29,7 +28,6 @@
     [self.view addSubview:self.titleLabel];
     [self.view addSubview:self.downloadBtn];
 
-    
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     tapGR.delegate = self;
     [self.imageView addGestureRecognizer:tapGR];
@@ -40,6 +38,7 @@
 }
 
 - (void)dismiss {
+    self.masterPhoto = nil;
     [self.delegate dismiss:self];
 }
 
@@ -59,7 +58,6 @@
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.userInteractionEnabled = YES;
-        
     }
     return _imageView;
 }
@@ -91,6 +89,7 @@
 
 - (void)configureWithSPCPhoto:(SFPMasterPhoto *)photo {
     self.masterPhoto = photo;
+    self.imageView.image = nil;
     self.titleLabel.text = photo.title;
     [self.titleLabel bringSubviewToFront:self.titleLabel];
     
@@ -102,7 +101,8 @@
             if (weakSelf) {
                 weakSelf.imageView.frame = self.view.bounds;
                 weakSelf.imageView.image = image;
-                [weakSelf loadFullImageForPhoto:weakSelf.masterPhoto];
+                weakSelf.progImageCounter = 0;
+                [weakSelf loadImageForPhoto:weakSelf.masterPhoto];
             }
         }
     }];
@@ -110,14 +110,47 @@
 
 #pragma mark - Private
 
-- (void)loadFullImageForPhoto:(SFPMasterPhoto *)photo {
+- (void)loadImageForPhoto:(SFPMasterPhoto *)masterPhoto {
     __weak typeof(self) weakSelf = self;
-    if (photo.cropped.url != nil) {
-        [[SFPImageCache sharedManager] imageForURL:photo.cropped.url completion:^(NSError *error, UIImage *image) {
+
+    // medium
+    NSURL *url = masterPhoto.medium.url;
+    BOOL shouldFetch = YES;
+
+    // try for large..?
+    if (self.progImageCounter == 1) {
+        if (masterPhoto.large.url != nil) {
+            url = masterPhoto.large.url;
+        }
+        else {
+            shouldFetch = NO;
+            self.progImageCounter++;
+        }
+    }
+
+    // try for original..?
+    if (self.progImageCounter == 2) {
+        if (masterPhoto.original.url != nil) {
+            shouldFetch = YES;
+            url = masterPhoto.original.url;
+        }
+        else {
+            shouldFetch = NO;
+        }
+    }
+    
+    if (shouldFetch && url != nil) {
+        [[SFPImageCache sharedManager] imageForURL:url completion:^(NSError *error, UIImage *image) {
             if (image) {
                 if (weakSelf) {
-                    weakSelf.imageView.image = image;
-                }
+                    if ([weakSelf.masterPhoto.remoteId isEqualToString:masterPhoto.remoteId]) {
+                        weakSelf.imageView.image = image;
+                        weakSelf.progImageCounter++;
+                        if (weakSelf.progImageCounter < 3){
+                            [weakSelf loadImageForPhoto:masterPhoto];
+                        }
+                    }
+                 }
             }
         }];
     }
@@ -129,7 +162,6 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error != NULL) {
-        // TODO: handle error
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error saving image" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];

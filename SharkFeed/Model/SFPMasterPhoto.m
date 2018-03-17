@@ -13,9 +13,9 @@
 @property (nonatomic, strong) NSString *remoteId;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) SFPPhoto *thumbnail;
+@property (nonatomic, strong) SFPPhoto *medium;
+@property (nonatomic, strong) SFPPhoto *large;
 @property (nonatomic, strong) SFPPhoto *original;
-@property (nonatomic, strong) SFPPhoto *landscape;
-@property (nonatomic, strong) SFPPhoto *cropped;
 
 @end
 
@@ -27,9 +27,9 @@
         _remoteId   = attributes[@"id"] != nil ? attributes[@"id"]  : @"";
         _title      = attributes[@"title"] != nil ? attributes[@"title"]  : @"";
         _thumbnail  = [self photoForType:@"t" inFullAttributes:attributes];
+        _medium     = [self photoForType:@"c" inFullAttributes:attributes];
+        _large      = [self photoForType:@"l" inFullAttributes:attributes];
         _original   = [self photoForType:@"o" inFullAttributes:attributes];
-        _landscape  = [self photoForType:@"l" inFullAttributes:attributes];
-        _cropped    = [self photoForType:@"c" inFullAttributes:attributes];
     }
     return self;
 }
