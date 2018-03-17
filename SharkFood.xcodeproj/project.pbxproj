@@ -14,6 +14,7 @@
 		87C2D24B205CB2BA00B3786E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D249205CB2BA00B3786E /* LaunchScreen.storyboard */; };
 		87C2D24E205CB2BA00B3786E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D24D205CB2BA00B3786E /* main.m */; };
 		87C2D258205CB2BA00B3786E /* SharkFoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D257205CB2BA00B3786E /* SharkFoodTests.m */; };
+		87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D267205CBE0500B3786E /* SFPContentManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		87C2D253205CB2BA00B3786E /* SharkFoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharkFoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87C2D257205CB2BA00B3786E /* SharkFoodTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharkFoodTests.m; sourceTree = "<group>"; };
 		87C2D259205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87C2D266205CBE0500B3786E /* SFPContentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPContentManager.h; sourceTree = "<group>"; };
+		87C2D267205CBE0500B3786E /* SFPContentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPContentManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +86,10 @@
 			children = (
 				87C2D23E205CB2BA00B3786E /* AppDelegate.h */,
 				87C2D23F205CB2BA00B3786E /* AppDelegate.m */,
-				87C2D241205CB2BA00B3786E /* SFPViewController.h */,
-				87C2D242205CB2BA00B3786E /* SFPViewController.m */,
+				87C2D263205CBD9800B3786E /* Model */,
+				87C2D264205CBDAA00B3786E /* View */,
+				87C2D262205CBD7A00B3786E /* Controller */,
+				87C2D265205CBDBB00B3786E /* Manager */,
 				87C2D244205CB2BA00B3786E /* Main.storyboard */,
 				87C2D247205CB2BA00B3786E /* Assets.xcassets */,
 				87C2D249205CB2BA00B3786E /* LaunchScreen.storyboard */,
@@ -101,6 +106,38 @@
 				87C2D259205CB2BA00B3786E /* Info.plist */,
 			);
 			path = SharkFoodTests;
+			sourceTree = "<group>";
+		};
+		87C2D262205CBD7A00B3786E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D241205CB2BA00B3786E /* SFPViewController.h */,
+				87C2D242205CB2BA00B3786E /* SFPViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		87C2D263205CBD9800B3786E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		87C2D264205CBDAA00B3786E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87C2D265205CBDBB00B3786E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				87C2D266205CBE0500B3786E /* SFPContentManager.h */,
+				87C2D267205CBE0500B3786E /* SFPContentManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */,
+				87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */,
 				87C2D24E205CB2BA00B3786E /* main.m in Sources */,
 				87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */,
 			);
@@ -360,6 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
 				INFOPLIST_FILE = SharkFood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -374,6 +413,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
 				INFOPLIST_FILE = SharkFood/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";

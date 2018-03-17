@@ -7,6 +7,7 @@
 //
 
 #import "SFPViewController.h"
+#import "SFPContentManager.h"
 
 const CGFloat kLineSpacing = 2;
 const CGFloat kInterItemSpacing = 2;
@@ -16,6 +17,7 @@ const CGFloat kInterItemSpacing = 2;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *contentArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -27,6 +29,8 @@ const CGFloat kInterItemSpacing = 2;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.collectionView];
+    self.currentPage = 1;
+    [self refreshContent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +69,11 @@ const CGFloat kInterItemSpacing = 2;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor colorWithWhite:157.0f/255.0f alpha:1.0f];
-        _collectionView.refreshControl = self.refreshControl;
+        if (@available(iOS 10.0, *)) {
+            _collectionView.refreshControl = self.refreshControl;
+        } else {
+            [_collectionView addSubview:self.refreshControl];
+        }
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
     }
     return _collectionView;
@@ -111,8 +119,20 @@ const CGFloat kInterItemSpacing = 2;
 
 - (void)refreshContent {
     //TODO: actually refresh the content
-    [self performSelector:@selector(reloadData) withObject:nil afterDelay:2];
+   // [self performSelector:@selector(reloadData) withObject:nil afterDelay:2];
+    
+    // clear cache ?
+    
+    [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray *contentArray) {
+        if (error) {
+            NSLog(@"error refreshing content");
+        }
+        else {
+            NSLog(@"content array %@",contentArray);
+        }
+    }];
 }
+
 
 
 @end
