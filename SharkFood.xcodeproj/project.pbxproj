@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D23F205CB2BA00B3786E /* AppDelegate.m */; };
-		87C2D243205CB2BA00B3786E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D242205CB2BA00B3786E /* ViewController.m */; };
+		87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D242205CB2BA00B3786E /* SFPViewController.m */; };
 		87C2D246205CB2BA00B3786E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D244205CB2BA00B3786E /* Main.storyboard */; };
 		87C2D248205CB2BA00B3786E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D247205CB2BA00B3786E /* Assets.xcassets */; };
 		87C2D24B205CB2BA00B3786E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D249205CB2BA00B3786E /* LaunchScreen.storyboard */; };
@@ -30,8 +30,8 @@
 		87C2D23B205CB2BA00B3786E /* SharkFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SharkFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87C2D23E205CB2BA00B3786E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87C2D23F205CB2BA00B3786E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		87C2D241205CB2BA00B3786E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		87C2D242205CB2BA00B3786E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		87C2D241205CB2BA00B3786E /* SFPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPViewController.h; sourceTree = "<group>"; };
+		87C2D242205CB2BA00B3786E /* SFPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPViewController.m; sourceTree = "<group>"; };
 		87C2D245205CB2BA00B3786E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87C2D247205CB2BA00B3786E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87C2D24A205CB2BA00B3786E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,8 +83,8 @@
 			children = (
 				87C2D23E205CB2BA00B3786E /* AppDelegate.h */,
 				87C2D23F205CB2BA00B3786E /* AppDelegate.m */,
-				87C2D241205CB2BA00B3786E /* ViewController.h */,
-				87C2D242205CB2BA00B3786E /* ViewController.m */,
+				87C2D241205CB2BA00B3786E /* SFPViewController.h */,
+				87C2D242205CB2BA00B3786E /* SFPViewController.m */,
 				87C2D244205CB2BA00B3786E /* Main.storyboard */,
 				87C2D247205CB2BA00B3786E /* Assets.xcassets */,
 				87C2D249205CB2BA00B3786E /* LaunchScreen.storyboard */,
@@ -205,7 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87C2D243205CB2BA00B3786E /* ViewController.m in Sources */,
+				87C2D243205CB2BA00B3786E /* SFPViewController.m in Sources */,
 				87C2D24E205CB2BA00B3786E /* main.m in Sources */,
 				87C2D240205CB2BA00B3786E /* AppDelegate.m in Sources */,
 			);
