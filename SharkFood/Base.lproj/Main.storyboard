@@ -64,16 +64,43 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoZ-o3-PJK" userLabel="PTRContainerView">
+                                <rect key="frame" x="0.0" y="50" width="375" height="150"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ptr-2" translatesAutoresizingMaskIntoConstraints="NO" id="pZy-Op-1q7" userLabel="ptr-2">
+                                        <rect key="frame" x="173" y="50" width="28" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="iPS-PH-G8r"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ptr-1" translatesAutoresizingMaskIntoConstraints="NO" id="PUs-Kl-YPE">
+                                        <rect key="frame" x="176" y="0.0" width="22" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="Biz-AW-WkE"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PUs-Kl-YPE" firstAttribute="centerX" secondItem="XoZ-o3-PJK" secondAttribute="centerX" id="JIk-zk-XRa"/>
+                                    <constraint firstItem="pZy-Op-1q7" firstAttribute="top" secondItem="XoZ-o3-PJK" secondAttribute="top" constant="50" id="Zng-i8-YDY"/>
+                                    <constraint firstItem="pZy-Op-1q7" firstAttribute="centerX" secondItem="XoZ-o3-PJK" secondAttribute="centerX" id="r7s-XL-a6U"/>
+                                    <constraint firstAttribute="height" constant="150" id="t7e-OY-nyg"/>
+                                    <constraint firstItem="PUs-Kl-YPE" firstAttribute="top" secondItem="XoZ-o3-PJK" secondAttribute="top" id="v83-0V-xYE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oFz-aR-vW9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7IR-SV-owI"/>
+                            <constraint firstItem="XoZ-o3-PJK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="A0P-IL-45o"/>
                             <constraint firstItem="XBR-5C-3NV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AeR-bB-sCH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N4D-Tl-n7u" secondAttribute="trailing" id="MCB-wY-WQJ"/>
                             <constraint firstItem="N4D-Tl-n7u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NBH-bH-3Ll"/>
                             <constraint firstItem="N4D-Tl-n7u" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Rbv-z5-8DB"/>
                             <constraint firstItem="oFz-aR-vW9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sm1-Y1-Ly1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XoZ-o3-PJK" secondAttribute="trailing" id="WLa-41-gR7"/>
                             <constraint firstItem="ZCb-9a-jF4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Z83-mX-r2t"/>
+                            <constraint firstItem="XoZ-o3-PJK" firstAttribute="top" secondItem="oFz-aR-vW9" secondAttribute="bottom" id="aMI-tt-vkV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZCb-9a-jF4" secondAttribute="bottom" constant="50" id="awO-Sq-3Vi"/>
                             <constraint firstItem="oFz-aR-vW9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gHI-70-63h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZCb-9a-jF4" secondAttribute="trailing" constant="20" id="pW8-Qj-Xbs"/>
@@ -82,8 +109,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="fishImage" destination="pZy-Op-1q7" id="5Ne-xF-cfb"/>
+                        <outlet property="hookImageView" destination="PUs-Kl-YPE" id="7d2-p5-Srs"/>
                         <outlet property="logoContainerView" destination="XBR-5C-3NV" id="HmJ-XI-jzu"/>
                         <outlet property="oceanImageView" destination="fXD-Tv-EYO" id="qMy-wK-94P"/>
+                        <outlet property="ptrContainerView" destination="XoZ-o3-PJK" id="MP2-pd-vPi"/>
                         <outlet property="swipePrompt" destination="ZCb-9a-jF4" id="yGK-9w-vKe"/>
                     </connections>
                 </viewController>
@@ -97,5 +127,7 @@
         <image name="intro-bg" width="414" height="736"/>
         <image name="logo-img" width="181" height="85"/>
         <image name="logo-title" width="104" height="16"/>
+        <image name="ptr-1" width="22" height="31"/>
+        <image name="ptr-2" width="28" height="44"/>
     </resources>
 </document>

@@ -27,6 +27,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *oceanImageView;
 @property (weak, nonatomic) IBOutlet UIView *logoContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *swipePrompt;
+@property (weak, nonatomic) IBOutlet UIView *ptrContainerView;
+@property (weak, nonatomic) IBOutlet UIImageView *fishImage;
+@property (weak, nonatomic) IBOutlet UIImageView *hookImageView;
+@property (nonatomic, assign) CGFloat bobble;
 
 
 @end
@@ -109,7 +113,8 @@
 - (UIRefreshControl *)refreshControl {
     if (!_refreshControl) {
         _refreshControl = [[UIRefreshControl alloc] init];
-        [_refreshControl addTarget:self action:@selector(refreshContent) forControlEvents:UIControlEventValueChanged];
+        _refreshControl.tintColor = [UIColor clearColor];
+        [_refreshControl addTarget:self action:@selector(beginPullToRefresh) forControlEvents:UIControlEventValueChanged];
     }
     return _refreshControl;
 }
@@ -161,6 +166,33 @@
     }];
 }
 
+- (void)beginPullToRefresh {
+    self.ptrContainerView.alpha = 1;
+    self.bobble = .1;
+    [self animatePTR];
+    [self refreshContent];
+}
+
+- (void)endPullToRefresh {
+    self.ptrContainerView.alpha = 0;
+    [self.refreshControl endRefreshing];
+}
+
+-(void)animatePTR {
+    
+    self.bobble = -1 * self.bobble;
+    dispatch_async(dispatch_get_main_queue(), ^(){
+         [UIView animateWithDuration:.1 animations:^{
+             self.hookImageView.center = CGPointMake(self.hookImageView.center.x, self.hookImageView.center.y + 10 * self.bobble);
+             self.fishImage.transform = CGAffineTransformMakeRotation(self.bobble);
+         } completion:^(BOOL finished) {
+              if (self.isFetchingContent) {
+                  [self animatePTR];
+              }
+          }];
+    });
+}
+
 - (void)refreshContent {
     
     if (!self.isFetchingContent) {
@@ -207,7 +239,8 @@
                 // finish up
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     weakSelf.isFetchingContent = NO;
-                    [weakSelf.refreshControl endRefreshing];
+                    [weakSelf endPullToRefresh];
+
                 });
             }
         }];
