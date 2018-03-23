@@ -155,7 +155,7 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SFPThumbnailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SFPThumbnailCollectionViewCell class]) forIndexPath:indexPath];
     SFPMasterPhoto *mPhoto = self.contentArray[indexPath.item];
-    [cell configureWithPhoto:mPhoto.thumbnail];
+    [cell configureWithPhoto:mPhoto];
     return cell;
 }
 
@@ -211,7 +211,7 @@
 
 #pragma mark - Private
 
--(void)isPanningAtStart:(UIPanGestureRecognizer*)panGR {
+- (void)isPanningAtStart:(UIPanGestureRecognizer*)panGR {
 
         if (panGR.state == UIGestureRecognizerStateBegan) {
             self.swipeStartPoint = [panGR translationInView:self.oceanImageView];
@@ -219,7 +219,7 @@
         else if (panGR.state == UIGestureRecognizerStateChanged) {
             CGPoint currPoint = [panGR translationInView:self.oceanImageView];
             float deltaX = fabs(self.swipeStartPoint.x - currPoint.x);
-            float requiredDelta = CGRectGetWidth(self.view.frame) * 0.6f;
+            float requiredDelta = CGRectGetWidth(self.view.frame) * 0.3f;
             float swipeAlpha = 1 - (deltaX / requiredDelta);
             if (deltaX > 0) {
                 self.oceanImageView.alpha = swipeAlpha;

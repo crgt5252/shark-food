@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SFPPhoto.h"
+#import "SFPMasterPhoto.h"
 
 @interface SFPThumbnailCollectionViewCell : UICollectionViewCell
 
-- (void)configureWithPhoto:(SFPPhoto *)photo;
+- (void)configureWithPhoto:(SFPMasterPhoto *)photo;
 
 @end

@@ -11,7 +11,7 @@
 
 @interface SFPThumbnailCollectionViewCell ()
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) SFPPhoto *currPhoto;
+@property (nonatomic, strong) SFPMasterPhoto *currPhoto;
 @end
 
 @implementation SFPThumbnailCollectionViewCell
@@ -35,24 +35,31 @@
 
 #pragma mark - Configuration
 
-- (void)configureWithPhoto:(SFPPhoto *)photo {
+- (void)configureWithPhoto:(SFPMasterPhoto *)photo {
     self.currPhoto = photo;
 
-    //thread-safe completion
     __weak typeof(self) weakSelf = self;
-    [[SFPImageCache sharedManager] imageForURL:photo.url completion:^(NSError *error, UIImage *image) {
-        if (image) {
-            if (weakSelf) {
-                //confirm we are still looking for this image
-                //that we havent i.e. dequeued & been reused before completing
-                if ([photo.url.absoluteString isEqualToString:weakSelf.currPhoto.url.absoluteString]) {
+    //start with thhumbnail
+    [self loadPhoto:photo.thumbnail completion:^(NSError *error, UIImage *image) {
+        if (weakSelf.currPhoto != nil && [photo.thumbnail.url.absoluteString isEqualToString:weakSelf.currPhoto.thumbnail.url.absoluteString]) {
+            weakSelf.imageView.image = image;
+            //load higher res
+            [weakSelf loadPhoto:photo.medium completion:^(NSError *error, UIImage *image) {
+                if (weakSelf.currPhoto != nil && [photo.medium.url.absoluteString isEqualToString:weakSelf.currPhoto.medium.url.absoluteString]) {
                     weakSelf.imageView.image = image;
                 }
-            }
+            }];
         }
     }];
 }
 
+- (void)loadPhoto:(SFPPhoto *)photo completion:(void(^)(NSError *error, UIImage *image))completion {
+    [[SFPImageCache sharedManager] imageForURL:photo.url completion:^(NSError *error, UIImage *image) {
+        if (image) { completion(nil,image); }
+        else if (error) { completion(error,nil); }
+        else { completion(nil,nil); }
+    }];
+}
 
 #pragma mark - Layout
 
