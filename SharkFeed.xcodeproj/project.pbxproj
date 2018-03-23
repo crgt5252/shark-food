@@ -12,13 +12,14 @@
 		87C2D246205CB2BA00B3786E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D244205CB2BA00B3786E /* Main.storyboard */; };
 		87C2D248205CB2BA00B3786E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87C2D247205CB2BA00B3786E /* Assets.xcassets */; };
 		87C2D24E205CB2BA00B3786E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D24D205CB2BA00B3786E /* main.m */; };
-		87C2D258205CB2BA00B3786E /* SharkFeedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D257205CB2BA00B3786E /* SharkFeedTests.m */; };
 		87C2D268205CBE0500B3786E /* SFPContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D267205CBE0500B3786E /* SFPContentManager.m */; };
 		87C2D26B205CD58C00B3786E /* SFPMasterPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26A205CD58C00B3786E /* SFPMasterPhoto.m */; };
 		87C2D26E205CD5AF00B3786E /* SFPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D26D205CD5AF00B3786E /* SFPPhoto.m */; };
 		87C2D271205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D270205CE12C00B3786E /* SFPThumbnailCollectionViewCell.m */; };
 		87C2D274205CE47B00B3786E /* SFPImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D273205CE47B00B3786E /* SFPImageCache.m */; };
 		87C2D27A205D141A00B3786E /* SFPLightBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D279205D141A00B3786E /* SFPLightBoxViewController.m */; };
+		87C2D27F2064DACD00B3786E /* SFPContentManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D27E2064DACD00B3786E /* SFPContentManagerTests.m */; };
+		87C2D2812064E35800B3786E /* SFPImageCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C2D2802064E35800B3786E /* SFPImageCacheTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,6 @@
 		87C2D24C205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87C2D24D205CB2BA00B3786E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		87C2D253205CB2BA00B3786E /* SharkFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharkFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		87C2D257205CB2BA00B3786E /* SharkFeedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharkFeedTests.m; sourceTree = "<group>"; };
 		87C2D259205CB2BA00B3786E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87C2D266205CBE0500B3786E /* SFPContentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPContentManager.h; sourceTree = "<group>"; };
 		87C2D267205CBE0500B3786E /* SFPContentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPContentManager.m; sourceTree = "<group>"; };
@@ -56,6 +56,8 @@
 		87C2D273205CE47B00B3786E /* SFPImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPImageCache.m; sourceTree = "<group>"; };
 		87C2D278205D141A00B3786E /* SFPLightBoxViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFPLightBoxViewController.h; sourceTree = "<group>"; };
 		87C2D279205D141A00B3786E /* SFPLightBoxViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPLightBoxViewController.m; sourceTree = "<group>"; };
+		87C2D27E2064DACD00B3786E /* SFPContentManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPContentManagerTests.m; sourceTree = "<group>"; };
+		87C2D2802064E35800B3786E /* SFPImageCacheTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFPImageCacheTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,8 @@
 		87C2D256205CB2BA00B3786E /* SharkFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				87C2D257205CB2BA00B3786E /* SharkFeedTests.m */,
+				87C2D27E2064DACD00B3786E /* SFPContentManagerTests.m */,
+				87C2D2802064E35800B3786E /* SFPImageCacheTests.m */,
 				87C2D259205CB2BA00B3786E /* Info.plist */,
 			);
 			path = SharkFeedTests;
@@ -279,7 +282,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87C2D258205CB2BA00B3786E /* SharkFeedTests.m in Sources */,
+				87C2D2812064E35800B3786E /* SFPImageCacheTests.m in Sources */,
+				87C2D27F2064DACD00B3786E /* SFPContentManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +420,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SharkFeed/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -432,6 +437,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SharkFeed/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -447,12 +453,13 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SharkFeedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFood.app/SharkFood";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFeed.app/SharkFeed";
 			};
 			name = Debug;
 		};
@@ -462,12 +469,13 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4ZBDQT3G34;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				INFOPLIST_FILE = SharkFeedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ct.SharkFeedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFood.app/SharkFood";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SharkFeed.app/SharkFeed";
 			};
 			name = Release;
 		};
