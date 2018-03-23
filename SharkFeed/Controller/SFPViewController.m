@@ -24,10 +24,13 @@
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic, strong) NSArray *contentArray;
+@property (nonatomic, strong) NSArray <SFPMasterPhoto *> *contentArray;
+@property (nonatomic, strong) NSArray <SFPMasterPhoto *> *contentQueueArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) BOOL isFetchingContent;
+@property (nonatomic, assign) BOOL isInsertingContent;
+@property (nonatomic, assign) BOOL isPTR;
 @property (weak, nonatomic) IBOutlet UIImageView *oceanImageView;
 @property (weak, nonatomic) IBOutlet UIView *logoContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *swipePrompt;
@@ -54,7 +57,7 @@
     [panRecognizer setMinimumNumberOfTouches:1];
     [panRecognizer setMaximumNumberOfTouches:1];
     [self.oceanImageView addGestureRecognizer:panRecognizer];
-    [self refreshContentAndClearCache:NO];
+    [self refreshContentAndClearCache:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,11 +82,20 @@
 
 #pragma mark - Accessors
 
-- (NSArray *)contentArray {
+- (NSArray<SFPMasterPhoto *> *)contentArray {
     if (!_contentArray){
         _contentArray = [NSArray array];
     }
     return _contentArray;
+}
+
+// holds content that we have preloaded while we wait for a good moment to
+// insert into our collection view (i.e. when user is not scrolling..)
+- (NSArray<SFPMasterPhoto *> *)contentQueueArray {
+    if (!_contentQueueArray){
+        _contentQueueArray = [NSArray array];
+    }
+    return _contentQueueArray;
 }
 
 - (SFPLightBoxViewController *)lightBoxViewController {
@@ -159,11 +171,25 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // lazily trigger fetch of upcoming content as user scrolls towards bottom of existing content
     if (self.collectionView.isTracking) {
-        if (self.collectionView.contentOffset.y >= self.collectionView.contentSize.height - 3 * self.collectionView.frame.size.height && self.collectionView.contentSize.height > 0) {
+        CGFloat progress = self.collectionView.contentSize.height - 8 * self.collectionView.frame.size.height;
+        if (self.collectionView.contentOffset.y >=  progress && self.collectionView.contentSize.height > 0) {
             [self refreshContentAndClearCache:NO];
         }
     }
 }
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate && scrollView == self.collectionView) {
+        [self addItemsFromInsertionQueue];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.collectionView) {
+        [self addItemsFromInsertionQueue];
+    }
+}
+
 
 #pragma mark - UICollectionViewFlowLayoutDelegate
 
@@ -218,6 +244,7 @@
     self.currentPage = 1;
     self.ptrContainerView.alpha = 1;
     self.bobble = .1;
+    self.isPTR = YES;
     [self.view bringSubviewToFront:self.collectionView];
     [self animatePTR];
     [self refreshContentAndClearCache:YES];
@@ -225,10 +252,11 @@
 
 - (void)endPullToRefresh {
     self.ptrContainerView.alpha = 0;
+    self.isPTR = NO;
     [self.refreshControl endRefreshing];
 }
 
--(void)animatePTR {
+- (void)animatePTR {
     
     self.bobble = -1 * self.bobble;
     dispatch_async(dispatch_get_main_queue(), ^(){
@@ -253,7 +281,7 @@
             [[SFPContentManager sharedManager] clearCachedContent];
         }
         
-         [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray *contentArray) {
+         [[SFPContentManager sharedManager] contentForPage:self.currentPage completion:^(NSError *error, NSArray<SFPMasterPhoto *> *contentArray) {
             if (weakSelf) {
                
                 //TODO: add error handling
@@ -272,37 +300,16 @@
                          });
                     }
                     else {
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            // note our current count for our batch update
-                            NSInteger previousSection0Count = [weakSelf collectionView:weakSelf.collectionView numberOfItemsInSection:0];
-                            
-                            // update the collection view data source
-                            weakSelf.contentArray = [weakSelf.contentArray arrayByAddingObjectsFromArray:contentArray];
-                            NSInteger section0Count = weakSelf.contentArray.count;
-                            
-                            // insert our newly fetched content into our collection view
-                            void (^sectionUpdateBlock)(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) = ^void(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) {
-                                if (previousPhotoCount != photoCount) {
-                                    NSMutableArray *newIndexPaths = [NSMutableArray array];
-                                    for (NSUInteger index = previousPhotoCount; index < photoCount; ++index) {
-                                        [newIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:section]];
-                                    }
-                                    [weakSelf.collectionView insertItemsAtIndexPaths:newIndexPaths];
-                                }
-                            };
-                            // perform the batch update to our collection view
-                            [weakSelf.collectionView performBatchUpdates:^{
-                                sectionUpdateBlock(0, previousSection0Count, section0Count);
-                            } completion:nil];
-                         });
+                        [weakSelf addContentToInsertionQueue:contentArray];
                     }
                 }
                 
                 // finish up
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     weakSelf.isFetchingContent = NO;
-                    [weakSelf endPullToRefresh];
-
+                    if (weakSelf.isPTR) {
+                        [weakSelf endPullToRefresh];
+                    }
                 });
             }
         }];
@@ -310,5 +317,69 @@
 }
 
 
+#pragma mark - ContentQueue Methods
+
+- (void)addContentToInsertionQueue:(NSArray<SFPMasterPhoto *> *)contentUpdates {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @synchronized(self.contentQueueArray) {
+            self.contentQueueArray = [self.contentQueueArray arrayByAddingObjectsFromArray:contentUpdates];
+        }
+    });
+}
+
+- (void)addItemsFromInsertionQueue {
+    if (!self.isInsertingContent) {
+        self.isInsertingContent = YES;
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            NSArray *contentArray = [NSArray array];
+            @synchronized(self.contentQueueArray) {
+                contentArray =  [NSArray arrayWithArray:self.contentQueueArray];
+            }
+            
+            // do we have updates to make?
+            if (contentArray.count > 0) {
+            
+                // empty the queue, now that we are doing this
+                [self clearInsertionQueue];
+
+                // note our current count for our batch update
+                NSInteger previousSection0Count = [self collectionView:self.collectionView numberOfItemsInSection:0];
+                
+                // update the collection view data source with the items from our insertion queue
+                self.contentArray = [self.contentArray arrayByAddingObjectsFromArray:contentArray];
+                NSInteger section0Count = self.contentArray.count;
+                
+                // insert our newly fetched content into our collection view
+                void (^sectionUpdateBlock)(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) = ^void(NSUInteger section, NSUInteger previousPhotoCount, NSUInteger photoCount) {
+                    if (previousPhotoCount != photoCount) {
+                        NSMutableArray *newIndexPaths = [NSMutableArray array];
+                        for (NSUInteger index = previousPhotoCount; index < photoCount; ++index) {
+                            [newIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:section]];
+                        }
+                        [self.collectionView insertItemsAtIndexPaths:newIndexPaths];
+                    }
+                };
+                // perform the batch update to our collection view
+                __weak typeof(self) weakSelf = self;
+                [self.collectionView performBatchUpdates:^{
+                    sectionUpdateBlock(0, previousSection0Count, section0Count);
+                } completion:^(BOOL finished) {
+                    weakSelf.isInsertingContent = NO;
+                }];
+            }
+            else {
+                self.isInsertingContent = NO;
+            }
+        });
+    }
+}
+
+- (void)clearInsertionQueue {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @synchronized(self.contentQueueArray) {
+            self.contentQueueArray = [NSArray array];
+        }
+    });
+}
 
 @end

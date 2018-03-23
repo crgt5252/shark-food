@@ -7,7 +7,6 @@
 //
 
 #import "SFPContentManager.h"
-#import "SFPMasterPhoto.h"
 
 @interface SFPContentManager ()
 @property (nonatomic, strong) NSMutableDictionary *contentDictionary;
@@ -46,7 +45,7 @@ NSString *const SPFErrorDomain = @"SPFErrorDomain";
 
 #pragma mark - Public
 
-- (void)contentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray *contentArray))completion {
+- (void)contentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray<SFPMasterPhoto *> *contentArray))completion {
 
     //return content immediately for this page if we've already fetched it
     if (self.contentDictionary[@(page)] != nil) {
@@ -85,7 +84,7 @@ NSString *const SPFErrorDomain = @"SPFErrorDomain";
     return [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",baseURLString,methodComponent,keyComponent,textComponent,formatComponent,nojsoncallbackComponent,pageComponent,extrasComponent];
 }
 
-- (void)fetchContentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray *contentArray))completion {
+- (void)fetchContentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray<SFPMasterPhoto *> *contentArray))completion {
  
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //fetch json
@@ -112,22 +111,28 @@ NSString *const SPFErrorDomain = @"SPFErrorDomain";
     });
 }
 
-- (void)parseJSON:(NSDictionary *)jsonDict forPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray *contentArray))completion {
+- (void)parseJSON:(NSDictionary *)jsonDict forPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray<SFPMasterPhoto *> *contentArray))completion {
+
+    NSString *photosKey  = @"photos";
+    NSString *photoKey   = @"photo";
+    NSString *statusKey  = @"stat";
+    NSString *codeKey    = @"code";
+    NSString *messageKey = @"message";
 
     //error in the status message?
-    if (jsonDict[@"stat"] != nil && [jsonDict[@"stat"] isEqualToString:@"fail"]) {
-        NSInteger errCode = jsonDict[@"code"] != nil ? [jsonDict[@"code"] integerValue] : 0;
-        NSDictionary *errMsg = jsonDict[@"message"] != nil ? jsonDict[@"message"] : @{@"message" : @"unknown error"};
+    if (jsonDict[statusKey] != nil && [jsonDict[statusKey] isEqualToString:@"fail"]) {
+        NSInteger errCode = jsonDict[codeKey] != nil ? [jsonDict[codeKey] integerValue] : 0;
+        NSDictionary *errMsg = jsonDict[messageKey] != nil ? jsonDict[messageKey] : @{messageKey : @"unknown error"};
         NSError *error = [[NSError alloc] initWithDomain:SPFErrorDomain code:errCode userInfo:errMsg];
         completion(error,nil);
     }
     
     //parse json
     NSMutableArray *resultsArray = [[NSMutableArray alloc] init];
-    if (jsonDict[@"photos"] != nil) {
-        NSDictionary *photosDictionary = jsonDict[@"photos"];
-        if (photosDictionary[@"photo"] != nil) {
-            NSArray *photosArray = photosDictionary[@"photo"];
+    if (jsonDict[photosKey] != nil) {
+        NSDictionary *photosDictionary = jsonDict[photosKey];
+        if (photosDictionary[photoKey] != nil) {
+            NSArray *photosArray = photosDictionary[photoKey];
             for (NSDictionary *photoDictionary in photosArray) {
                 [resultsArray addObject:[[SFPMasterPhoto alloc] initWithAttributes:photoDictionary]];
             }
@@ -137,7 +142,7 @@ NSString *const SPFErrorDomain = @"SPFErrorDomain";
     [self cacheContent:resultsArray forPage:page];
 
     //return the parsed content in our completion handler
-    completion(nil,resultsArray);
+    completion(nil,[NSArray arrayWithArray:resultsArray]);
 }
 
 - (void)cacheContent:(NSArray *)content forPage:(NSInteger)page {

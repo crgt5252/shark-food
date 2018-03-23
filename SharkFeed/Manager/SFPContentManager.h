@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SFPMasterPhoto.h"
 
 @interface SFPContentManager : NSObject
 
 + (id)sharedManager;
 
-- (void)contentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray *contentArray))completion;
+- (void)contentForPage:(NSInteger)page completion:(void(^)(NSError *error, NSArray<SFPMasterPhoto *> *contentArray))completion;
 - (void)clearCachedContent;
 
 @end
